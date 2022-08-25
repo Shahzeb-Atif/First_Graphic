@@ -1,0 +1,193 @@
+#######################################
+## Array Animation Assignment (2019) ##
+## ICS3UI                            ##
+## By Shahzeb Atif                   ##
+#######################################
+
+#Imports and Screen pack
+from tkinter import *
+from time import *
+from random import *
+from math import * 
+
+Myinterface = Tk()
+screen = Canvas(Myinterface, height=800, width=800, background='gainsboro')
+screen.pack()
+
+#Screws and Dents on the wall
+for i in range(22):
+    a = randint(0,800)
+    b = randint(0,800)
+    c = randint(2, 3)
+    screen.create_oval(a, b, a+c, b+c, fill="azure4")
+
+#Lamp
+screen.create_oval(450,50,350,-50, fill ="gold",outline= "goldenrod", width = 2)
+screen.create_line(450,2,350.5,2, fill="goldenrod",width = 7)
+screen.create_line(450,2,350.5,2, fill="black",width = 2.8)
+
+#TV    
+screen.create_rectangle(100,400,450,150, fill ="seashell3", outline = "black")
+screen.create_rectangle(110,390,440,160, fill ="gray10", outline = "grey")
+screen.create_oval(440,390,448,398, fill ="red2", outline = "grey")
+
+#Wooden TV Base
+screen.create_rectangle(125,475,425,450, fill ="sienna4", outline = "black")
+screen.create_rectangle(125,750,425,775, fill ="sienna4", outline = "black")
+screen.create_rectangle(125,750,150,475, fill ="sienna4", outline = "black")
+screen.create_rectangle(425,475,400,750, fill ="sienna4", outline = "black")
+screen.create_rectangle(400,475,150,750, fill ="salmon4", outline = "black")
+screen.create_rectangle(150,525,400,550, fill ="sienna4", outline = "black")
+screen.create_rectangle(150,600,400,625, fill ="sienna4", outline = "black")
+screen.create_rectangle(150,675,400,700, fill ="sienna4", outline = "black")
+
+#TV Stand
+screen.create_rectangle(255,440,295,400, fill ="seashell3", outline = "black")
+screen.create_rectangle(310,440,240,450, fill ="seashell3", outline = "black")
+
+#Consoles
+screen.create_rectangle(225,420,130,450, fill ="seashell3", outline = "black")
+screen.create_rectangle(415,430,325,450, fill ="seashell3", outline = "black")
+
+#Carpet
+screen.create_rectangle(800,775,0,800, fill ="lightsalmon4", outline = "black")
+
+#Socks
+screen.create_polygon(775,775,775,750,750,750,725,775, fill = "gray39", outline = "gray45", smooth = "true")
+screen.create_polygon(700,775,700,750,675,750,650,775, fill = "gray39", outline = "gray45", smooth = "true")
+
+#Stick man body / variables for moving arm
+xArm1 = 725
+yArm1 = 557
+xArm2 = 687.5
+yArm2 = 662.5
+
+xHand1 = 700
+yHand1 = 675
+xHand2 = 675
+yHand2 = 650
+
+#Coordinates for ball
+xBall = 630
+yBall = 567
+
+#Body parts
+screen.create_line(725,650,687.5,750, fill="slategray2", width = 6)
+screen.create_line(725,650,762.5,750, fill="slategray2", width = 6)
+screen.create_line(725,650,725,550,fill="dodgerblue2", width = 6)
+screen.create_line(725,557,762.5,662.5, fill="dodgerblue2", width = 6)
+screen.create_oval(775,675,750,650, fill ="salmon2")
+screen.create_oval(750,500,700,550, fill ="salmon2")
+
+#Background
+screen.create_oval(425,775,500,700, fill ="thistle3")
+#screen.create_rectangle(500,200,575,350, fill ="steelblue1", outline = "black")
+#screen.create_rectangle(600,200,675,350, fill ="steelblue2", outline = "black")
+#screen.create_rectangle(700,200,775,350, fill ="steelblue3", outline = "black")
+
+#Drawer Knobs
+screen.create_oval(270,495,280,505, fill ="salmon3")
+screen.create_oval(270,570,280,580, fill ="salmon3")
+screen.create_oval(270,645,280,655, fill ="salmon3")
+screen.create_oval(270,720,280,730, fill ="salmon3")
+
+#Iron Man Posters
+IM = PhotoImage(file = "IronMan1.gif")
+IMM = screen.create_image(510,275,image=IM)
+
+IM2 = PhotoImage(file = "IronMan2.gif")
+IMM2 = screen.create_image(625,275,image=IM2)
+
+IM3 = PhotoImage(file = "IronMan3.gif")
+IMM3 = screen.create_image(745,275,image=IM3)
+
+#Wii = PhotoImage(file = "wii.gif")
+#Wiii = screen.create_image(,image=Wii)                                                                                                                                                                         
+
+#Arm Movement
+for i in range(20):
+    movingArm = screen.create_line(xArm1,yArm1,xArm2,yArm2, fill="dodgerblue2", width = 6)
+    movingHand = screen.create_oval(xHand1,yHand1,xHand2,yHand2, fill ="salmon2")
+
+    radians = i*pi/180
+    
+    xArm2 += 3.2*sin(radians+4*pi/3)
+    xHand1 += 3.2*sin(radians+4*pi/3)
+    xHand2 += 3.2*sin(radians+4*pi/3)
+    
+    yArm2 -= 5
+    yHand1 -= 5
+    yHand2 -= 5    
+
+    screen.update()
+    sleep(0.03)
+    screen.delete(movingArm, movingHand)
+
+movingArm = screen.create_line(xArm1,yArm1,xArm2,yArm2, fill="dodgerblue2", width = 6)
+movingHand = screen.create_oval(xHand1,yHand1,xHand2,yHand2, fill ="salmon2")
+
+#Ball movement
+for i in range(35):
+    ball = screen.create_oval(xBall-15,yBall-15,xBall+15,yBall+15,fill="darkslategray")
+    xBall -= 10
+    yBall -= 8
+
+    screen.update()
+    sleep(0.03)
+    screen.delete(ball)
+
+#CrackingEffect
+numCracks = 18
+deltaTheta = 1*pi/numCracks
+angleDeviation = pi/6  
+
+x = []
+y = []
+theta = []
+width = []
+speed = []
+
+for crackNum in range(0,numCracks):
+      x.append(275)
+      y.append(275)
+      theta.append( uniform(0,2*pi) )
+      speed.append( uniform(3, 6) )
+      width.append( randint(1,1))
+      
+#impact point   
+for i in range(20):
+     
+    for i in range(0, numCracks):
+        alpha = theta[i] + uniform(-angleDeviation, angleDeviation)
+           
+        x2 = x[i] + speed[i]*cos(alpha)
+        y2 = y[i]  - speed[i]*sin(alpha)
+
+        screen.create_line(x[i] ,y[i], x2 ,y2, fill="gray31", width= width[i])
+
+        x[i] = x2
+        y[i] = y2
+
+    ball = screen.create_oval(xBall-15,yBall-15,xBall+15,yBall+15,fill="darkslategray")
+    yBall += 24
+
+    screen.update()
+    sleep(0.03)
+    screen.delete(ball)
+
+
+ball = screen.create_oval(xBall-15,yBall-15,xBall+15,yBall+15,fill="darkslategray")
+
+#Gridlines
+#spacing = 25
+
+#for x in range(0, 800, spacing):
+    
+    #screen.create_line(x, 0, x, 800, fill="white")
+    #screen.create_text(x, 5, text=str(x), font="Times 9", anchor = N)
+
+#for y in range(0, 800, spacing):
+    #screen.create_line(0, y, 800, y, fill="white")
+    #screen.create_text(5, y, text=str(y), font="Times 9", anchor = W)
+
+
